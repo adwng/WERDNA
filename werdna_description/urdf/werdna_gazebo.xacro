@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <xacro:include filename:'physics.xacro'/>
+
+    <xacro:macro name='hip'>
+        <mu1>0.2</mu1>
+        <mu2>0.2</mu2>
+        <maxVel>0.01</maxVel>
+        <self_collide>1</self_collide>
+        <material>Gazebo/Red</material>
+    <xacro:macro>
+
+    <xacro:macro name='knee'>
+        <mu1>0.2</mu1>
+        <mu2>0.2</mu2>
+        <maxVel>0.01</maxVel>
+        <self_collide>1</self_collide>
+        <material>Gazebo/Orange</material>
+    <xacro:macro>
+
+    <xacro:macro name='wheel'>
+        <mu1>0.9</mu1>
+        <mu2>0.9</mu2>
+        <fdir1>1 0 0</fdir1>
+        <maxVel>0.0</maxVel>
+        <maxContacts>1</maxContacts>
+        <gravity>true</gravity>
+        <restitution_coefficient>1</restitution_coefficient>
+        <threshold>0</threshold>
+        <self_collide>1</self_collide>
+        <material>Gazebo/Black</material>
+    <xacro:macro>
+
+    <!-- body  -->
+    <gazebo reference="base_link">
+        <mu1>0.05</mu1>
+        <mu2>0.05</mu2>
+        <maxVel>0.01</maxVel>
+        <material>Gazebo/DarkGrey</material>
+    </gazebo>
+
+    <!-- hip -->
+    <gazebo reference="left_hip_link">
+        <xacro:hip></xacro:hip>
+    </gazebo>   
+    <gazebo reference="right_hip_link">
+        <xacro:hip></xacro:hip>
+    </gazebo>   
+
+    <!-- knee -->
+    <gazebo reference="left_knee_link">
+        <xacro:knee></xacro:knee>
+    </gazebo>   
+    <gazebo reference="right_knee_link">
+        <xacro:knee></xacro:knee>
+    </gazebo>   
+
+    <gazebo reference="left_wheel_link">
+        <xacro:wheel></xacro:wheel>
+    </gazebo>   
+    <gazebo reference="right_hip_link">
+        <xacro:wheel></xacro:wheel>
+    </gazebo>  
+
+
+
+</robot>

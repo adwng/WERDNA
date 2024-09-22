@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+    
+    <xacro:include filename='consts.xacro'/>
+    <xacro:include filename='inertial_macros.xacro'/>
+
+    <xacro:macro name='inertial_body'>
+        <xacro:inertial_box mass="2.0" x="0.15" y="0.2" z="0.12">
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        <xacro:inertial_box/> 
+    </xacro:macro>
+
+    <xacro:macro name='inertial_left_hip'>
+        <xacro:inertial_box mass="1.0" x="0.01" y="0.1" z="0.2">
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        <xacro:inertial_box/> 
+    </xacro:macro>
+
+    <xacro:macro name='inertial_right_hip'>
+        <xacro:inertial_box mass="1.0" x="0.01" y="0.1" z="0.2">
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        <xacro:inertial_box/> 
+    </xacro:macro>
+
+    <xacro:macro name='inertial_right_knee'>
+        <xacro:inertial_box mass="1.0" x="0.01" y="0.1" z="0.2">
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        <xacro:inertial_box/> 
+    </xacro:macro>
+
+    <xacro:macro name='inertial_right_knee'>
+        <xacro:inertial_box mass="1.0" x="0.01" y="0.1" z="0.2">
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        <xacro:inertial_box/> 
+    </xacro:macro>
+
+    <xacro:macro name='inertial_left_wheel'>
+        <xacro:inertial_cylinder mass="2.2" radius="0.0855" length="0.045">
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        <xacro:inertial_box/> 
+    </xacro:macro>
+
+    <xacro:macro name='inertial_right_wheel'>
+        <xacro:inertial_cylinder mass="2.2" radius="0.0855" length="0.045">
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        <xacro:inertial_box/> 
+    </xacro:macro>
+
+</robot>

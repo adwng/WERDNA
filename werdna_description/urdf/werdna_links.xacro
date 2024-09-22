@@ -1,0 +1,186 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+    
+    <xacro:include filename="consts.xacro" /> 
+    <xacro:include filename="physics.xacro" /> 
+
+    <!-- meshes -->
+    <xacro:macro name="body_mesh">
+        <mesh filename="file://$(find werdna_description)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </xacro:macro>
+    <xacro:macro name="left_hip_mesh">
+        <mesh filename="file://$(find werdna_description)/meshes/left_hip_link_1.stl" scale="0.001 0.001 0.001"/>
+    </xacro:macro>
+    <xacro:macro name="right_hip_mesh">
+        <mesh filename="file://$(find werdna_description)/meshes/right_hip_link_1.stl" scale="0.001 0.001 0.001"/>
+    </xacro:macro>
+    <xacro:macro name="left_knee_mesh">
+        <mesh filename="file://$(find werdna_description)/meshes/left_knee_link_1.stl" scale="0.001 0.001 0.001"/>
+    </xacro:macro>
+    <xacro:macro name="right_knee_mesh">
+        <mesh filename="file://$(find werdna_description)/meshes/right_knee_link_1.stl" scale="0.001 0.001 0.001"/>
+    </xacro:macro>
+
+
+    <!-- inertial_link -->
+    <link name="inertial_link">
+        <xacro:inertial_body></xacro:inertial_body>
+    </link>
+
+    <!-- *********** base link *********** -->
+    <link name="base_link">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <xacro:body_mesh></xacro:body_mesh>
+            </geometry>
+            <material name="green">
+                <color rgba="0.2 1 0.2 1"/>
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <xacro:body_mesh></xacro:body_mesh>
+            </geometry>
+        </collision>
+    </link>
+    
+    <!-- hips -->
+    <link name="left_hip_link">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <xacro:left_hip_mesh></xacro:left_hip_mesh>
+            </geometry>
+            <material name="red">
+                <color rgba="0.8 0.2 0.2 1"/>
+            </material> 
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <xacro:left_hip_mesh></xacro:left_hip_mesh>
+            </geometry>
+        </collision>
+        <xacro:inertial_left_hip></xacro:inertial_left_hip>
+    </link>
+
+    <link name="right_hip_link">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <xacro:right_hip_mesh></xacro:right_hip_mesh>
+            </geometry>
+            <material name="red">
+                <color rgba="0.8 0.2 0.2 1"/>
+            </material> 
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <xacro:right_hip_mesh></xacro:right_hip_mesh>
+            </geometry>
+        </collision>
+        <xacro:inertial_right_hip></xacro:inertial_right_hip>
+    </link>
+
+    <!-- knees -->
+    <link name="left_knee_link">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <xacro:left_knee_mesh></xacro:left_knee_mesh>
+            </geometry>
+            <material name="red">
+                <color rgba="0.8 0.2 0.2 1"/>
+            </material> 
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <xacro:left_knee_mesh></xacro:left_knee_mesh>
+            </geometry>
+        </collision>
+        <xacro:inertial_left_knee></xacro:inertial_left_knee>
+    </link>
+
+    <link name="right_knee_link">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <xacro:right_knee_mesh></xacro:right_knee_mesh>
+            </geometry>
+            <material name="red">
+                <color rgba="0.8 0.2 0.2 1"/>
+            </material> 
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <xacro:right_knee_mesh></xacro:right_knee_mesh>
+            </geometry>
+        </collision>
+        <xacro:inertial_right_knee></xacro:inertial_right_knee>
+    </link>
+
+    <!-- wheels -->
+
+    <link name="left_wheel">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <cylinder radius="${wheel_radius}" length="${wheel_length}"/>
+            </geometry>
+            <material name="red">
+                <color rgba="0.8 0.2 0.2 1"/>
+            </material> 
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <cylinder radius="${wheel_radius}" length="${wheel_length}"/>
+            </geometry>
+            <surface>
+                <friction>
+                    <ode>
+                        <mu>1</mu>
+                        <mu2>1</mu2>
+                        <fdir1>1 0 0</fdir1>
+                    </ode>
+                </friction>
+            </surface>
+        </collision>
+        <xacro:inertial_left_wheel></xacro:inertial_left_wheel>
+    </link>
+
+    <link name="right_wheel">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <cylinder radius="${wheel_radius}" length="${wheel_length}"/>
+            </geometry>
+            <material name="red">
+                <color rgba="0.8 0.2 0.2 1"/>
+            </material> 
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <cylinder radius="${wheel_radius}" length="${wheel_length}"/>
+            </geometry>
+            <surface>
+                <friction>
+                    <ode>
+                        <mu>1</mu>
+                        <mu2>1</mu2>
+                        <fdir1>1 0 0</fdir1>
+                    </ode>
+                </friction>
+            </surface>
+        </collision>
+        <xacro:inertial_right_wheel></xacro:inertial_right_wheel>
+    </link>
+
+
+</robot>
