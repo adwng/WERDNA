@@ -22,21 +22,27 @@ def generate_launch_description():
     # Get package name
     prefix = get_package_share_directory("bringup")
     gazebo_prefix = get_package_share_directory("gazebo_ros")
+    teleop_prefix = get_package_share_directory('werdna_teleop')
 
     # Path for robot state publisher
     rsp_file = os.path.join(prefix, "launch", "rsp.launch.py")
+
+    # Path for teleop
+    teleop_file = os.path.join(teleop_prefix, 'launch', 'werdna_teleop.launch.py')
 
     # Path for gazebo_ros_pkgs 
     gazebo_file = os.path.join(gazebo_prefix, "launch", "gzserver.launch.py")
     gz_file = os.path.join(gazebo_prefix, 'launch', 'gzclient.launch.py')
 
-    # Path to custom world file
-    world_file = os.path.join(prefix, 'worlds', "empty.world")
-
     # Include the robot description launch file
     rsp = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(rsp_file),
         launch_arguments={'gui': 'false'}.items()
+    )
+
+    # Include launch description for werdna-teleop
+    teleop = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(teleop_file)
     )
 
     # Include the Gazebo launch file, provided by the gazebo_ros package
@@ -80,24 +86,6 @@ def generate_launch_description():
         arguments=['joint_broad']
     )
 
-    # Launch teleop with remapping as teleop
-    teleop = Node(
-        package='robot_control',
-        executable='joy_control',
-        output='screen',
-        remappings=[('/cmd_vel','/cmd_vel/keyboard')],
-        prefix=['xterm -e']  # Optional: open in a new terminal
-    )
-
-    # teleop = Node(
-    #     package='teleop_twist_keyboard',
-    #     executable='teleop_twist_keyboard',
-    #     output='screen',
-    #     remappings=[('/cmd_vel', '/diff_cont/cmd_vel_unstamped')],
-    #     prefix=['xterm -e']
-
-    # )
-
     return LaunchDescription([
         declare_use_sim_time_cmd,
         rsp,
@@ -107,5 +95,5 @@ def generate_launch_description():
         diff_drive_spawner,
         position_cont_spawner,
         joint_broad_spawner,
-        # teleop,
+        teleop,
     ])

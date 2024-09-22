@@ -3,6 +3,7 @@ from rclpy.node import Node
 from sensor_msgs.msg import JointState
 from geometry_msgs.msg import Twist
 from std_msgs.msg import Float64MultiArray
+from werdna_msgs.msg import JoyCtrlCmds
 import numpy as np
 
 class Inverse_Kinematics(Node):
@@ -10,7 +11,7 @@ class Inverse_Kinematics(Node):
         super().__init__('Inverse_Kinematics_Node')
 
         # Subscribers: teleop, joint states
-        self.teleop_subscriber = self.create_subscription(Twist, 'cmd_vel_keyboard', self.teleop_callback, 10)
+        self.teleop_subscriber = self.create_subscription(Twist, 'werdna_control', self.teleop_callback, 10)
         self.joints_subscriber = self.create_subscription(JointState, 'joint_states', self.joints_callback, 10)
         
         # Publishers: joints 
@@ -41,12 +42,10 @@ class Inverse_Kinematics(Node):
         self.prev_height
 
     def teleop_callback(self, msg):
-        self.height = msg.linear.z
+        self.height = msg.height
+        self.displacement = msg.displacement
         self.linear_x = msg.linear.x
         self.angular_z = msg.angular.z
-
-        if self.height > self.max_height:
-            self.height = self.max_height
 
     def joints_callback(self, msg):
     # Assuming 'msg' contains joint names, positions, velocities, and efforts

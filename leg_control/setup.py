@@ -20,7 +20,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'pycontrol = leg_control.inverse_kinematics:main'
+            'control = leg_control.motion_planner:main'
         ],
     },
 )
