@@ -1,68 +1,102 @@
-<?xml version="1.0"?>
-<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+<?xml version="1.0" ?>
+<robot name="Model_URDF" xmlns:xacro="http://www.ros.org/wiki/xacro" >
 
-    <xacro:include filename:'physics.xacro'/>
+<gazebo reference="chassis_link">
+  <material>Gazebo/Blue</material>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
+  <self_collide>true</self_collide>
+  <gravity>true</gravity>
+</gazebo>
 
-    <xacro:macro name='hip'>
-        <mu1>0.2</mu1>
-        <mu2>0.2</mu2>
-        <maxVel>0.01</maxVel>
-        <self_collide>1</self_collide>
-        <material>Gazebo/Red</material>
-    <xacro:macro>
+<gazebo reference="imu_link">
+  <material>Gazebo/White</material>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
+  <self_collide>true</self_collide>
+  <gravity>true</gravity>
+</gazebo>
 
-    <xacro:macro name='knee'>
-        <mu1>0.2</mu1>
-        <mu2>0.2</mu2>
-        <maxVel>0.01</maxVel>
-        <self_collide>1</self_collide>
-        <material>Gazebo/Orange</material>
-    <xacro:macro>
+<gazebo reference="left_hip_link">
+  <material>Gazebo/Orange</material>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
+  <maxVel>0.01</maxVel>
+  <self_collide>true</self_collide>
+</gazebo>
 
-    <xacro:macro name='wheel'>
-        <mu1>0.9</mu1>
-        <mu2>0.9</mu2>
-        <fdir1>1 0 0</fdir1>
-        <maxVel>0.0</maxVel>
-        <maxContacts>1</maxContacts>
-        <gravity>true</gravity>
-        <restitution_coefficient>1</restitution_coefficient>
-        <threshold>0</threshold>
-        <self_collide>1</self_collide>
-        <material>Gazebo/Black</material>
-    <xacro:macro>
+<gazebo reference="left_knee_link">
+  <material>Gazebo/Red</material>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
+  <maxVel>0.01</maxVel>
+  <self_collide>true</self_collide>
+</gazebo>
 
-    <!-- body  -->
-    <gazebo reference="base_link">
-        <mu1>0.05</mu1>
-        <mu2>0.05</mu2>
-        <maxVel>0.01</maxVel>
-        <material>Gazebo/DarkGrey</material>
-    </gazebo>
+<gazebo reference="left_wheel">
+  <mu1>0.9</mu1>
+  <mu2>0.9</mu2>
+  <fdir1>1 0 0</fdir1>
+  <maxVel>0.0</maxVel>
+  <maxContacts>1</maxContacts>
+  <gravity>true</gravity>
+  <restitution_coefficient>1</restitution_coefficient>
+  <threshold>0</threshold>
+  <self_collide>1</self_collide>
+  <material>Gazebo/Black</material>
+</gazebo>
 
-    <!-- hip -->
-    <gazebo reference="left_hip_link">
-        <xacro:hip></xacro:hip>
-    </gazebo>   
-    <gazebo reference="right_hip_link">
-        <xacro:hip></xacro:hip>
-    </gazebo>   
+<gazebo reference="right_hip_link">
+  <material>Gazebo/Orange</material>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
+  <maxVel>0.01</maxVel>
+  <self_collide>true</self_collide>
+</gazebo>
 
-    <!-- knee -->
-    <gazebo reference="left_knee_link">
-        <xacro:knee></xacro:knee>
-    </gazebo>   
-    <gazebo reference="right_knee_link">
-        <xacro:knee></xacro:knee>
-    </gazebo>   
+<gazebo reference="right_knee_link">
+  <material>Gazebo/Red</material>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
+  <maxVel>0.01</maxVel>
+  <self_collide>true</self_collide>
+</gazebo>
 
-    <gazebo reference="left_wheel_link">
-        <xacro:wheel></xacro:wheel>
-    </gazebo>   
-    <gazebo reference="right_hip_link">
-        <xacro:wheel></xacro:wheel>
-    </gazebo>  
+<gazebo reference="right_wheel">
+  <mu1>0.9</mu1>
+  <mu2>0.9</mu2>
+  <fdir1>1 0 0</fdir1>
+  <maxVel>0.0</maxVel>
+  <maxContacts>1</maxContacts>
+  <gravity>true</gravity>
+  <restitution_coefficient>1</restitution_coefficient>
+  <threshold>0</threshold>
+  <self_collide>1</self_collide>
+  <material>Gazebo/Black</material>
+</gazebo>
 
+<gazebo reference="imu_link">
+  <sensor name="imu_sensor" type="imu">
+    <always_on>true</always_on>
+    <update_rate>100</update_rate>
+    <visualize>true</visualize>
+    <topic>__default_topic__</topic>
+    <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
+      <topicName>imu</topicName> <!-- Ensure this matches your UKF config -->
+      <bodyName>imu_link</bodyName>   <!-- This should be the same as the IMU link name -->
+      <updateRateHZ>100.0</updateRateHZ>
+      <gaussianNoise>0.0</gaussianNoise>
+      <xyzOffset>0 0 0</xyzOffset>
+      <rpyOffset>0 0 0</rpyOffset>
+      <frameName>imu</frameName> <!-- Frame name for TF broadcasts -->
+      <ros>
+        <remapping>~/out:=/imu</remapping> <!-- ROS 2 topic remapping -->
+      </ros>
+      <initialOrientationAsReference>false</initialOrientationAsReference>
+    </plugin>
+    <pose>0 0 0 0 0 0</pose>
+  </sensor>
+</gazebo>
 
 
 </robot>

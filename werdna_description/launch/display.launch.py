@@ -11,7 +11,7 @@ def generate_launch_description():
 
     gui_arg = DeclareLaunchArgument(
         name='gui',
-        default_value='True'
+        default_value='False'
     )
     show_gui = LaunchConfiguration('gui')
 
@@ -33,26 +33,25 @@ def generate_launch_description():
 
     # Create the joint_state_publisher node
     node_joint_state_publisher = Node(
-        condition=UnlessCondition(show_gui),
         package='joint_state_publisher',
         executable='joint_state_publisher',
         name='joint_state_publisher',
         output='screen'
     )
 
-    # Optionally include the joint_state_publisher_gui (for GUI control of the joints)
-    node_joint_state_publisher_gui = Node(
-        condition=IfCondition(show_gui),
-        package='joint_state_publisher_gui',
-        executable='joint_state_publisher_gui',
-        name='joint_state_publisher_gui',
-        output='screen'
-    )
+    # # Optionally include the joint_state_publisher_gui (for GUI control of the joints)
+    # node_joint_state_publisher_gui = Node(
+    #     condition=IfCondition(show_gui),
+    #     package='joint_state_publisher_gui',
+    #     executable='joint_state_publisher_gui',
+    #     name='joint_state_publisher_gui',
+    #     output='screen'
+    # )
 
     # Launch!
     return LaunchDescription([
-        gui_arg,
+        # gui_arg,
         node_robot_state_publisher,
         node_joint_state_publisher,
-        node_joint_state_publisher_gui,
+        # node_joint_state_publisher_gui,
     ])

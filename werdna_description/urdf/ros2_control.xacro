@@ -60,7 +60,7 @@
     <gazebo>
         <plugin name="gazebo_ros2_control" filename="libgazebo_ros2_control.so">
 
-            <parameters>$(find werdna_description)/config/werdna_joint_controller.yaml</parameters>
+            <parameters>$(find bringup)/configs/ros2_controllers.yaml</parameters>
 
         </plugin>
     </gazebo>

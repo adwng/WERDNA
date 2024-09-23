@@ -1,13 +1,13 @@
 controller_manager:
   ros__parameters:
     update_rate: 50
-    use_sim_time: true
+    use_sim_time: false
 
     diff_cont:
       type: diff_drive_controller/DiffDriveController
 
-    position_cont:
-      type: position_controllers/JointGroupPositionController
+    joint_cont:
+      type: joint_trajectory_controller/JointTrajectoryController
 
     joint_broad:
       type: joint_state_broadcaster/JointStateBroadcaster
@@ -25,16 +25,32 @@ diff_cont:
 
     use_stamped_vel: false
 
-position_cont:
+joint_cont:
   ros__parameters:
     joints:
       - left_hip_joint
       - left_knee_joint
       - right_hip_joint
       - right_knee_joint
-    interface_name: position
+    
+    command_interfaces:
+      - position
+
+    state_interfaces:
+      - position
+      - velocity
+
+    action_monitor_rate: 20.0
+
+    allow_partial_joints_goal: false
+    open_loop_control: false
+    constraints:
+      stopped_velocity_tolerance: 0.01
+      goal_time: 0.0
 
 # Uncomment and configure if needed
-# joint_broad:
-#   ros__parameters:
-#     publish_rate: 50.0
+joint_broad:
+  ros__parameters:
+    publish_rate: 50.0
+
+    use_local_topics: true

@@ -11,8 +11,8 @@ WERDNA is a wheeled bipedal trained by reinforcement learning for locomotion and
 > Hasn't been tested on real hardware
 
 ## TODO
-- [ ] Add IMU joint
-- [ ] New simplified description
-- [ ] Fix inverse kinematics code
+- [x] Add IMU joint
+- [x] New simplified description
+- [x] Fix inverse kinematics code
 - [ ] Establish environment for reinforcement learning
 - [ ] Write Hardware Interface

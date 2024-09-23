@@ -73,10 +73,10 @@ def generate_launch_description():
         arguments=['diff_cont']
     )
 
-    position_cont_spawner = Node(
+    joint_cont_spawner = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=['position_cont']
+        arguments=['joint_cont']
     )
 
     # Launch the controller manager for managing joints from ros2_control
@@ -93,7 +93,7 @@ def generate_launch_description():
         gazebo_client,
         spawn_entity,
         diff_drive_spawner,
-        position_cont_spawner,
+        joint_cont_spawner,
         joint_broad_spawner,
         teleop,
     ])

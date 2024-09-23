@@ -1,14 +1,6 @@
 <?xml version="1.0"?>
 <robot name='werdna' xmlns:xacro="http://www.ros.org/wiki/xacro">
-    
-    <!-- links -->
-    <xacro:include filename='werdna_links.xacro'/>
-
-    <!-- joints -->
-    <xacro:include filename="werdna_joints.xacro"/>
-
-    <!-- Others -->
-    <xacro:include filename="ros2_control.xacro"/>
+    <xacro:include filename='werdna.xacro'/>
     <xacro:include filename="werdna_gazebo.xacro"/>
-
+    <xacro:include filename="ros2_control.xacro"/>
 </robot>
