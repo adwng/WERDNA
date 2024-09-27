@@ -12,7 +12,7 @@ def generate_launch_description():
     urdf_prefix = get_package_share_directory('werdna_description')
     gazebo_prefix = get_package_share_directory('gazebo_ros')
 
-    urdf_file = os.path.join(urdf_prefix, 'launch', 'display.launch.py')
+    urdf_file = os.path.join(urdf_prefix, 'launch', 'rsp.launch.py')
     gazebo_file = os.path.join(gazebo_prefix, 'launch', 'gzserver.launch.py')
     gz_file = os.path.join(gazebo_prefix, 'launch', 'gzclient.launch.py')
 
@@ -36,7 +36,7 @@ def generate_launch_description():
         arguments=[
             '-topic', 'robot_description', 
             '-entity', 'werdna',
-            '-z', '0.09'
+            '-z', '0.02'
         ],
         output='screen'
     )   

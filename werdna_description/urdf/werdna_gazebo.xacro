@@ -2,75 +2,57 @@
 <robot name="Model_URDF" xmlns:xacro="http://www.ros.org/wiki/xacro" >
 
 <gazebo reference="chassis_link">
-  <material>Gazebo/Blue</material>
   <mu1>0.2</mu1>
   <mu2>0.2</mu2>
+  <material>Gazebo/Blue</material>
   <self_collide>true</self_collide>
   <gravity>true</gravity>
 </gazebo>
 
 <gazebo reference="imu_link">
   <material>Gazebo/White</material>
-  <mu1>0.2</mu1>
-  <mu2>0.2</mu2>
   <self_collide>true</self_collide>
   <gravity>true</gravity>
 </gazebo>
 
 <gazebo reference="left_hip_link">
   <material>Gazebo/Orange</material>
-  <mu1>0.2</mu1>
-  <mu2>0.2</mu2>
   <maxVel>0.01</maxVel>
-  <self_collide>true</self_collide>
+  <!-- <self_collide>true</self_collide> -->
 </gazebo>
 
 <gazebo reference="left_knee_link">
   <material>Gazebo/Red</material>
-  <mu1>0.2</mu1>
-  <mu2>0.2</mu2>
   <maxVel>0.01</maxVel>
-  <self_collide>true</self_collide>
+  <!-- <self_collide>true</self_collide> -->
 </gazebo>
 
 <gazebo reference="left_wheel">
-  <mu1>0.9</mu1>
-  <mu2>0.9</mu2>
-  <fdir1>1 0 0</fdir1>
-  <maxVel>0.0</maxVel>
+  <mu1>0.5</mu1>
+  <mu2>0.5</mu2>
   <maxContacts>1</maxContacts>
   <gravity>true</gravity>
-  <restitution_coefficient>1</restitution_coefficient>
-  <threshold>0</threshold>
   <self_collide>1</self_collide>
   <material>Gazebo/Black</material>
 </gazebo>
 
 <gazebo reference="right_hip_link">
   <material>Gazebo/Orange</material>
-  <mu1>0.2</mu1>
-  <mu2>0.2</mu2>
   <maxVel>0.01</maxVel>
-  <self_collide>true</self_collide>
+  <!-- <self_collide>true</self_collide> -->
 </gazebo>
 
 <gazebo reference="right_knee_link">
   <material>Gazebo/Red</material>
-  <mu1>0.2</mu1>
-  <mu2>0.2</mu2>
   <maxVel>0.01</maxVel>
-  <self_collide>true</self_collide>
+  <!-- <self_collide>true</self_collide> -->
 </gazebo>
 
 <gazebo reference="right_wheel">
-  <mu1>0.9</mu1>
-  <mu2>0.9</mu2>
-  <fdir1>1 0 0</fdir1>
-  <maxVel>0.0</maxVel>
+  <mu1>0.5</mu1>
+  <mu2>0.5</mu2>
   <maxContacts>1</maxContacts>
   <gravity>true</gravity>
-  <restitution_coefficient>1</restitution_coefficient>
-  <threshold>0</threshold>
   <self_collide>1</self_collide>
   <material>Gazebo/Black</material>
 </gazebo>

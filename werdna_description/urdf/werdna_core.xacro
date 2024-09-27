@@ -2,5 +2,5 @@
 <robot name='werdna' xmlns:xacro="http://www.ros.org/wiki/xacro">
     <xacro:include filename='werdna.xacro'/>
     <xacro:include filename="werdna_gazebo.xacro"/>
-    <xacro:include filename="ros2_control.xacro"/>
+    <xacro:include filename="ros2_control_sim.xacro"/>
 </robot>

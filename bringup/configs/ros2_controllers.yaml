@@ -1,6 +1,6 @@
 controller_manager:
   ros__parameters:
-    update_rate: 50
+    update_rate: 20
     use_sim_time: false
 
     diff_cont:
@@ -14,13 +14,13 @@ controller_manager:
 
 diff_cont:
   ros__parameters:
-    publish_rate: 50.0
+    publish_rate: 20.0
 
     base_frame_id: base_link
 
     left_wheel_names: ['left_wheel_joint']
     right_wheel_names: ['right_wheel_joint']
-    wheel_separation: 0.329
+    wheel_separation: 0.4855
     wheel_radius: 0.0855
 
     use_stamped_vel: false
@@ -49,8 +49,8 @@ joint_cont:
       goal_time: 0.0
 
 # Uncomment and configure if needed
-joint_broad:
-  ros__parameters:
-    publish_rate: 50.0
+# joint_broad:
+#   ros__parameters:
+#     publish_rate: 50.0
 
-    use_local_topics: true
+#     use_local_topics: true

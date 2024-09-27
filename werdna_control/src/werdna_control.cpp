@@ -1,3 +1,4 @@
+
 #include <rosidl_runtime_cpp/bounded_vector.hpp>
 #include <rosidl_runtime_cpp/message_initialization.hpp>
 
@@ -38,7 +39,7 @@ public:
             std::bind(&MotionPlanner::teleop_callback, this, std::placeholders::_1));
         
         joint_states_subscriber = this->create_subscription<sensor_msgs::msg::JointState>(
-            "joint_broad/joint_states", 10,
+            "joint_states", 10,
             std::bind(&MotionPlanner::joints_callback, this, std::placeholders::_1));
         
         leg_publisher = this->create_publisher<trajectory_msgs::msg::JointTrajectory>(

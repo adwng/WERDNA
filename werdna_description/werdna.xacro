@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <robot name='werdna' xmlns:xacro="http://www.ros.org/wiki/xacro">
     
-    <xacro:include filename="consts.xacro"/>  
-    <xacro:include filename='inertial_macros.xacro'/>
+    <xacro:include filename="urdf/consts.xacro"/>  
+    <xacro:include filename='urdf/inertial_macros.xacro'/>
 
     <!-- Limits -->
     <xacro:macro name="hip_limits">
@@ -13,9 +13,7 @@
     </xacro:macro>
 
     <!-- *********** base link *********** -->
-    <link name="base_link"></link>
-
-    <link name="chassis_link">
+    <link name="base_link">
         <xacro:inertial_box mass="${chassis_mass}" x="${chassis_length}" y="${chassis_width}" z="${chassis_height}">
             <origin xyz="0 0 0" rpy="0 0 0"/>
         </xacro:inertial_box>
@@ -32,25 +30,6 @@
                 <box size="${chassis_length} ${chassis_width} ${chassis_height}"/>
             </geometry>
             <material name="blue"/>
-        </collision>
-    </link>
-
-    <link name="castor_link">
-        <xacro:inertial_sphere mass="${0.02}" radius="0.01725">
-            <origin xyz="0 0 0" rpy="0 0 0"/>
-        </xacro:inertial_sphere>
-        <visual>
-            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
-            <geometry>
-                <sphere radius="0.01725"/>
-            </geometry>
-            <material name="white"/>
-        </visual>
-        <collision>
-            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
-            <geometry>
-                <sphere radius="0.01725"/>
-            </geometry>
         </collision>
     </link>
 
@@ -197,30 +176,17 @@
         </xacro:inertial_cylinder>
     </link>
 
-    <!-- chassis_joint -->
-    <joint name="chassis_joint" type="fixed">
-        <origin xyz="0.0 0.0 ${chassis_height/2}" rpy="0.0 0.0 0.0"/>
-        <parent link="base_link"/>
-        <child link="chassis_link"/>
-    </joint>
-
     <!-- imu joint -->
     <joint name="imu_joint" type="fixed">
         <origin xyz="0.0 0.0 ${chassis_height/2 + imu_height/2}" rpy="0.0 0.0 0.0"/>
-        <parent link="chassis_link"/>
+        <parent link="base_link"/>
         <child link="imu_link"/>
-    </joint>
-
-    <joint name="castor_joint" type="fixed">
-        <origin xyz="0.0 0.0 -${chassis_height/2}" rpy="0.0 0.0 0.0"/>
-        <parent link="chassis_link"/>
-        <child link="castor_link"/>
     </joint>
 
     <!-- hip joints -->
     <joint name="left_hip_joint" type="revolute">
         <origin xyz="0.0 ${chassis_width/2 + rod_width/2} 0.0" rpy="0.0 ${3.142/2} 0.0"/>
-        <parent link="chassis_link"/>
+        <parent link="base_link"/>
         <child link="left_hip_link"/>
         <axis xyz="0.0 1.0 0.0"/>
         <xacro:hip_limits></xacro:hip_limits>
@@ -231,7 +197,7 @@
 
     <joint name="right_hip_joint" type="revolute">
         <origin xyz="0.0 -${chassis_width/2 + rod_width/2} 0.0" rpy="0.0 ${3.142/2} 0.0"/>
-        <parent link="chassis_link"/>
+        <parent link="base_link"/>
         <child link="right_hip_link"/>
         <axis xyz="0.0 1.0 0.0"/>
         <xacro:hip_limits></xacro:hip_limits>

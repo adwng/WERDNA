@@ -3,20 +3,20 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
     
     <!-- joint's limits -->
-    <xacro:property name="hip_high_limit" value="1.047198"/>
-    <xacro:property name="hip_low_limit" value="-1.047198"/>
-    <xacro:property name="knee_high_limit" value="2.094395"/>
-    <xacro:property name="knee_low_limit" value="-2.094395"/>
-    <xacro:property name="velocity" value="1"/>
-    <xacro:property name="effort" value="10"/>
+    <xacro:property name="hip_high_limit" value="3.142"/>
+    <xacro:property name="hip_low_limit" value="-3.142"/>
+    <xacro:property name="knee_high_limit" value="3.142"/>
+    <xacro:property name="knee_low_limit" value="-3.142"/>
+    <xacro:property name="velocity" value="100.0"/>
+    <xacro:property name="effort" value="10.0"/>
 
     <!-- joint's dynamics -->
     <xacro:property name="use_dynamics" value="true"/>
     <xacro:macro name="hip_joint_dynamics">
-        <dynamics damping="0.01" friction="10000"/>
+        <dynamics friction="2000"/>
     </xacro:macro>
     <xacro:macro name="knee_joint_dynamics">
-        <dynamics damping="0.01" friction="10000"/>
+        <dynamics friction="2000"/>
     </xacro:macro>
 
     <xacro:property name="wheel_radius" value="0.0855"/>
@@ -58,7 +58,7 @@
     <xacro:property name="rod_width" value="0.05"/> 
     <xacro:property name="rod_height" value="0.2"/>
 
-    <xacro:property name="chassis_mass" value="2.0"/>
+    <xacro:property name="chassis_mass" value="4.0"/>
     <xacro:property name="rod_mass" value="1.0"/>
     <xacro:property name="wheel_mass" value="2.2"/>
     <xacro:property name="imu_mass" value="0.01"/>
